@@ -1,0 +1,56 @@
+.speech-box-container {
+    position: fixed;
+    display: flex;
+    flex-direction: row; /* Align children side by side */
+    justify-content: space-between; /* Adjust spacing if needed */
+    align-items: center; /* Vertically align items */
+    background-color: rgb(183, 183, 183);
+    padding: 20px 30px;  
+    min-height: 122px;
+    border: 2px black solid;
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 15px; /* Adjusted to push the SpeechBox below the header */
+    top: 80px; /* Position it below the header */
+    left: 0;
+    right: 0;
+    width: 96%;
+    z-index: 999; /* Ensure it's visible above content */
+    margin-right: 5px;
+  }
+  
+  .speech-box {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between tiles */
+    min-height: 50px; /* Prevents shrinking too much */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow-x: auto; /* Enable scrolling if too many words */
+    max-width: 1150px;
+    max-height: 100px;
+  }
+
+  .speech-box-image {
+    width: 70px;
+    height: auto;
+    object-fit: cover;
+    margin-right: 5px;
+}
+  
+  .speech-box-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .speech-box-buttons button {
+    padding: 10px 20px;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 1rem;
+    color: #333;
+  }

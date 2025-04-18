@@ -1,0 +1,59 @@
+/* Style the container */
+.board-selector {
+  display: flex;
+  flex-direction: column; /* Stack label and dropdown */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-family: Arial, sans-serif;
+  width: 100%; /* Allow for full-width centering */
+  color:  rgba(57, 57, 60, 0.87) !important;
+}
+
+/* Label styling */
+.board-selector__label {
+  font-size: 30px; /* Increase font size for better visibility */
+  margin-bottom: 12px; /* Add space between label and dropdown */
+  font-weight: 600;
+  color:  rgba(57, 57, 60, 0.87) !important;
+  text-align: center; /* Center the label */
+}
+
+/* Dropdown styling */
+.board-selector__dropdown {
+  width: 60%; /* Increase width of dropdown */
+  padding: 16px 20px; /* Increase padding for larger size */
+  font-size: 25px; /* Increase font size for better readability */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  text-align-last: center; /* Center the selected option's text */
+  -webkit-appearance: none; /* Remove default dropdown arrow (Webkit browsers) */
+  -moz-appearance: none; /* Remove default dropdown arrow (Firefox) */
+  appearance: none; /* Remove default dropdown arrow */
+  appearance: none; /* Remove default dropdown arrow styling */
+}
+
+/* Focused dropdown styling */
+.board-selector__dropdown:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Hover effect on dropdown */
+.board-selector__dropdown:hover {
+  border-color: #888;
+}
+
+/* Option styling */
+.board-selector__dropdown option {
+  padding: 8px;
+  text-align: center; /* Center the text inside the dropdown options */
+}
+
+/* Disabled state for dropdown */
+.board-selector__dropdown:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}

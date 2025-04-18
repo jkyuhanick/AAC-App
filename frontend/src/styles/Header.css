@@ -1,0 +1,45 @@
+/* Header styles */
+header {
+  background-color: rgb(64, 64, 68);
+  width: 100vw;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  color: white;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icons i {
+  font-size: 20px;
+  color: white;
+  margin-right: 40px;
+}
+
+.icons i:hover {
+  color: rgb(181, 181, 181);
+}
+
+.user-email {
+  color: white;
+  margin: 5px;
+  padding: 10px;
+  gap: 10px;
+}
+
+.user-icon {
+  margin-left: 30px;
+}
