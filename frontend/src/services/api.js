@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Set the base URL for the backend
-const API_URL = 'http://localhost:5001';
+const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001';
 
 // Axios instance for setting up default headers 
 const api = axios.create({
