@@ -12,6 +12,7 @@ function LoginForm({ onClose, onLogin, onSwitch }) { // Added onSwitch
     try {
       const userData = await loginUser(email, password);
       onLogin(userData); // Update state in parent with the user data
+      document.cookie.split(';').forEach(cookie => console.log(cookie));
       window.location.reload();
       onClose();
     } catch (err) {
