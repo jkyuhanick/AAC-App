@@ -9,7 +9,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true,  // Keep this if you're using cookies
+  withCredentials: true,  
 });
 
 // interceptor to include the token in the Authorization header for each request

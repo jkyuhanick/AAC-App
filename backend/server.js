@@ -28,8 +28,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'http://localhost:5173', // URL of the React app
-    credentials: true, // Allow cookies to be sent with requests
+  origin: ['http://localhost:5173', 'https://aac-app-1.onrender.com'],
+  credentials: true,
 }));
 
 
