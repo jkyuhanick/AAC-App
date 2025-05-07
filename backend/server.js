@@ -234,8 +234,8 @@ app.post('/api/login', async (req, res) => {
     // Set the JWT token in the cookie
     res.cookie('jwt', token, {
         httpOnly: true, // Make the cookie inaccessible from JS
-        secure: process.env.NODE_ENV === 'production', // Set to true in production if using HTTPS
-        sameSite: 'Strict', // Helps prevent attacks
+        secure: true, // Set to true in production if using HTTPS
+        sameSite: 'None', // Helps prevent attacks
         maxAge: 3600000*24*30*6 // 6 months
     });
 
