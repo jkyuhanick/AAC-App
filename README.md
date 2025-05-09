@@ -26,9 +26,3 @@ You can explore the app directly at the following deployed link:
 https://aac-app-1.onrender.com 
 
 Note: The first time you visit the site, it may take a minute to load due to the initial server spin-up time on Render’s free-tier instance.
-
-# How It Works
-
-User Boards: After logging in, users can create boards with custom icons and phrases. The icons are linked to speech functionality, enabling real-time communication.
-Text-to-Speech: Users can click on icons to generate speech, which is powered by AWS Polly.
-Speech Box Clearing: The speech box can be cleared with a single click, providing a fresh start for new communication.
