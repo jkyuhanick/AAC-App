@@ -31,27 +31,34 @@ export const registerUser = async (email, password) => {
   };
   
 
-//  Log in a user and store JWT in cookies
+// Log in a user and store JWT in cookies
 export const loginUser = async (email, password) => {
   try {
-    const response = await api.post("/api/login", { email, password });
-    return response.data.user;  // Ensure the correct user data is returned
+    const response = await api.post(
+      "/api/login",
+      { email, password },
+      { withCredentials: true } 
+    );
+    return response.data.user;
   } catch (error) {
     console.error("Error logging in:", error);
     throw error.response?.data || { message: "Network error. Please try again." };
   }
 };
-  
-  // Get the currently authenticated user
-  export const getCurrentUser = async () => {
-    try {
-        const response = await api.get("/api/current-user");
-        return response.data.user;
-    } catch (error) {
-        console.error("Error fetching current user:", error);
-        return null;
-    }
- };
+
+// Get the currently authenticated user
+export const getCurrentUser = async () => {
+  try {
+    const response = await api.get("/api/current-user", {
+      withCredentials: true, 
+    });
+    return response.data.user;
+  } catch (error) {
+    console.error("Error fetching current user:", error);
+    return null;
+  }
+};
+
  
 
 
