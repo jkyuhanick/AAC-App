@@ -15,9 +15,14 @@ const HomePage = ({ user, allBoards }) => {
         try {
           const data = await getBoardChoices();
           const defaultBoard = {
-          name: "Guest Board",
-          choices: data,
-        };
+            _id: "guest", // dummy ID
+            name: "Guest Board",
+            choices: allChoices.map(choice => ({
+              _id: choice._id,
+              phrase: choice.phrase,
+              image: choice.image
+            }))
+          };
         console.log(defaultBoard);
          setCurrentBoard(defaultBoard);
         } catch (error) {
