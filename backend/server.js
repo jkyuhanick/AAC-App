@@ -710,9 +710,9 @@ app.get("/api/board-choices", async (req, res) => {
 
 
 // GET /api/boards/default - get the default public board
-app.get("api/boards/default", async (req, res) => {
+app.get("/api/boards/default", async (req, res) => {
   try {
-    const defaultBoard = await BoardChoice.find();
+    const defaultBoard = await Board.findOne().populate("choices");
     if (!defaultBoard) {
       return res.status(404).json({ message: "Default board not found." });
     }
