@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Board from "../components/Board";
 import SpeechBox from "../components/SpeechBox";
 import Tile from "../components/Tile";
-import { getBoardById } from "../services/api";
+import { getBoardById, getBoardChoices } from "../services/api";
 import "../styles/styles.css";
 import "../styles/HomePage.css";
 
@@ -49,7 +49,7 @@ const HomePage = ({ user, allBoards }) => {
   if (!user) {
     return (
       <div className="board-container">
-        <h3 className="user-alert">Log in to create custom boards.</h3>
+        <p className="user-alert">Log in to create custom boards.</p>
         <SpeechBox words={speechWords} setWords={setSpeechWords} />
         <div className="choices-container">
           {defaultChoices.map((choice) => (
