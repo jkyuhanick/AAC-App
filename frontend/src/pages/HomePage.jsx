@@ -11,28 +11,7 @@ const HomePage = ({ user, allBoards }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(!user){
-      const fetchDefaultChoices = async () => {
-        try {
-          const data = await getBoardChoices();
-          const defaultBoard = {
-            _id: "guest", // dummy ID
-            name: "Guest Board",
-            choices: data.map(choice => ({
-              _id: choice._id,
-              phrase: choice.phrase,
-              image: choice.image
-            }))
-          };
-        console.log(defaultBoard);
-        setCurrentBoard(defaultBoard);
-        } catch (error) {
-          console.error("Error fetching default choices:", error);
-        }
-      };
-
-      fetchDefaultChoices();
-    } else {
+     if(user) {
       const fetchInitialBoard = async () => {
         const lastViewedBoardId = localStorage.getItem("lastViewedBoardId");
 
@@ -56,13 +35,8 @@ const HomePage = ({ user, allBoards }) => {
   if (!user) {
     return (
       <div>
-      {!user && (
-        <h3 className="user-alert" style={{ textAlign: "center" }}>
-          Log in to create custom boards.
-        </h3>
-      )}
-      <defaultBoardBoard/>
-    </div>
+        <DefaultBoard/>
+      </div>
     );
   }
 
