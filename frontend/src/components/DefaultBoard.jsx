@@ -1,10 +1,14 @@
-// components/DefaultBoard.js
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Tile from "./Tile";
 import SpeechBox from "./SpeechBox";
-import { useEffect, useState } from "react";
-import { getDefaultBoard } from "../services/api";
+import BoardSelector from "./BoardSelector";
+import '../styles/Board.css';
+import { synthesizeSpeech, getBoards, getBoardById } from "../services/api";
 
 const DefaultBoard = () => {
   const [defaultBoard, setDefaultBoard] = useState(null);
+  const [speechWords, setSpeechWords] = useState([]);
 
   useEffect(() => {
     const fetchBoard = async () => {
@@ -14,6 +18,24 @@ const DefaultBoard = () => {
 
     fetchBoard();
   }, []);
+
+  const addWord = (choice) => {
+    let word = typeof choice === "string" ? choice : choice?.text;
+    if (!word) return;
+
+    setSpeechWords((prev) => [...prev, { text: word, image: choice.image || "" }]);
+    speakWithPolly(word);
+  };
+
+  const speakWithPolly = async (word) => {
+    try {
+      const audioUrl = await synthesizeSpeech(word);
+      new Audio(audioUrl).play();
+    } catch (error) {
+      console.error("Speech error:", error);
+    }
+  };
+
 
   return (
     <div>
