@@ -17,7 +17,7 @@ const HomePage = ({ user, allBoards }) => {
           const defaultBoard = {
             _id: "guest", // dummy ID
             name: "Guest Board",
-            choices: allChoices.map(choice => ({
+            choices: data.map(choice => ({
               _id: choice._id,
               phrase: choice.phrase,
               image: choice.image
