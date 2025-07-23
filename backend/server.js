@@ -728,7 +728,7 @@ app.get("/api/boards/default", async (req, res) => {
       choices: choices
     };
 
-    res.json(board);
+    res.json({ title: "Default Board", choices });
   } catch (error) {
     console.error("Error fetching default board:", error);
     res.status(500).json({ message: "Error fetching default board" });
