@@ -10,6 +10,7 @@ import "../styles/HomePage.css";
 const HomePage = ({ user, allBoards }) => {
   const [currentBoard, setCurrentBoard] = useState(null);
   const [defaultChoices, setDefaultChoices] = useState([]);
+  const [speechWords, setSpeechWords] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
