@@ -229,6 +229,7 @@ export const getBoardChoices = async () => {
 export const getDefaultBoard = async () => {
   try {
     const response = await api.get("/api/boards/default");
+    console.log('response.data!!!!!!!!!', response.data);
     return response.data;
   } catch (error){
     console.error("Error fetching default board", error);

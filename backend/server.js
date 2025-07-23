@@ -98,6 +98,33 @@ if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath, { recursive: true });
 }
 
+// GET /api/boards/default - Simulate a board from public choices
+app.get("/api/boards/default", async (req, res) => {
+  try {
+    const choices = await BoardChoice.find({
+      user: { $exists: false } // Public choices only
+    });
+
+    for (let choice of choices) {
+      if (choice.image) {
+        choice.image = await getSignedImageUrl(choice.image);
+      }
+    }
+
+    const board = {
+      _id: "default",
+      title: "Default Board",
+      choices: choices
+    };
+
+    res.json({ title: "Default Board", choices });
+  } catch (error) {
+    console.error("Error fetching default board:", error);
+    res.status(500).json({ message: "Error fetching default board" });
+  }
+});
+
+
 // Middleware for handling errors
 app.use((req, res, next) => {
     res.jsonResponse = (status, message, data = null) => {
@@ -707,34 +734,6 @@ app.get("/api/board-choices", async (req, res) => {
     res.status(500).json({ message: "Error fetching board choices" });
   }
 });
-
-
-// GET /api/boards/default - Simulate a board from public choices
-app.get("/api/boards/default", async (req, res) => {
-  try {
-    const choices = await BoardChoice.find({
-      user: { $exists: false } // Public choices only
-    });
-
-    for (let choice of choices) {
-      if (choice.image) {
-        choice.image = await getSignedImageUrl(choice.image);
-      }
-    }
-
-    const board = {
-      _id: "default",
-      title: "Default Board",
-      choices: choices
-    };
-
-    res.json({ title: "Default Board", choices });
-  } catch (error) {
-    console.error("Error fetching default board:", error);
-    res.status(500).json({ message: "Error fetching default board" });
-  }
-});
-
 
 
 // 404 error for undefined routes
