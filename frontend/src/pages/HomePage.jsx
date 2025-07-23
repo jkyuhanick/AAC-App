@@ -18,7 +18,11 @@ const HomePage = ({ user, allBoards }) => {
       const fetchDefaultChoices = async () => {
         try {
           const data = await getBoardChoices();
-          setDefaultChoices(data.choices || []);
+          const defaultBoard = {
+          name: "Guest Board",
+          choices: data,
+        };
+         setCurrentBoard(defaultBoard);
         } catch (error) {
           console.error("Error fetching default choices:", error);
         }
