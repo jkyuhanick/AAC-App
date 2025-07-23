@@ -7,30 +7,54 @@ import "../styles/HomePage.css";
 
 const HomePage = ({ user, allBoards }) => {
   const [currentBoard, setCurrentBoard] = useState(null);
+  const [defaultChoices, setDefaultChoices] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchInitialBoard = async () => {
-      const lastViewedBoardId = localStorage.getItem("lastViewedBoardId");
-
-      if (lastViewedBoardId) {
-        const savedBoard = await getBoardById(lastViewedBoardId);
-        if (savedBoard) {
-          setCurrentBoard(savedBoard);
-          return;
+    if(!user){
+      const fetchDefaultChoices = async () => {
+        try {
+          const data = await getBoardChoices();
+          setDefaultChoices(data.choices || []);
+        } catch (error) {
+          console.error("Error fetching default choices:", error);
         }
-      }
+      };
 
-      if (allBoards.length > 0) {
-        setCurrentBoard(allBoards[0]); // Default board
-      }
-    };
+      fetchDefaultChoices();
+    } else {
+      const fetchInitialBoard = async () => {
+        const lastViewedBoardId = localStorage.getItem("lastViewedBoardId");
 
-    fetchInitialBoard();
+        if (lastViewedBoardId) {
+          const savedBoard = await getBoardById(lastViewedBoardId);
+          if (savedBoard) {
+            setCurrentBoard(savedBoard);
+            return;
+          }
+        }
+
+        if (allBoards.length > 0) {
+          setCurrentBoard(allBoards[0]); // Default board
+        }
+      };
+
+      fetchInitialBoard();
+    }
   }, [allBoards]);
 
   if (!user) {
-    return <h3 className="user-alert">Please log in to view your boards.</h3>;
+    return (
+      <div className="board-container">
+        <h3 className="user-alert">Log in to create custom boards.</h3>
+        <SpeechBox words={speechWords} setWords={setSpeechWords} />
+        <div className="choices-container">
+          {defaultChoices.map((choice) => (
+            <Tile key={choice._id} choice={choice} onClick={addWord} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   if (allBoards.length === 0) {
