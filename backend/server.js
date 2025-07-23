@@ -710,7 +710,7 @@ app.get("/api/board-choices", async (req, res) => {
 
 
 // GET /api/boards/default - get the default public board
-app.get("/default", async (req, res) => {
+app.get("api/boards/default", async (req, res) => {
   try {
     const defaultBoard = await BoardChoice.find().populate("choices");
     if (!defaultBoard) {
