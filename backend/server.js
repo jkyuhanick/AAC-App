@@ -709,19 +709,32 @@ app.get("/api/board-choices", async (req, res) => {
 });
 
 
-// GET /api/boards/default - get the default public board
+// GET /api/boards/default - Simulate a board from public choices
 app.get("/api/boards/default", async (req, res) => {
   try {
-    const defaultBoard = await Board.findOne().populate("choices");
-    if (!defaultBoard) {
-      return res.status(404).json({ message: "Default board not found." });
+    const choices = await BoardChoice.find({
+      user: { $exists: false } // Public choices only
+    });
+
+    for (let choice of choices) {
+      if (choice.image) {
+        choice.image = await getSignedImageUrl(choice.image);
+      }
     }
-    res.json(defaultBoard);
-  } catch (err) {
-    console.error("Error fetching default board:", err);
-    res.status(500).json({ message: "Server error" });
+
+    const board = {
+      _id: "default",
+      title: "Default Board",
+      choices: choices
+    };
+
+    res.json(board);
+  } catch (error) {
+    console.error("Error fetching default board:", error);
+    res.status(500).json({ message: "Error fetching default board" });
   }
 });
+
 
 
 // 404 error for undefined routes
