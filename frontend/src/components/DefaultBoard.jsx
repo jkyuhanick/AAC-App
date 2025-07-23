@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Tile from "./Tile";
 import SpeechBox from "./SpeechBox";
-import BoardSelector from "./BoardSelector";
 import '../styles/Board.css';
-import { synthesizeSpeech, getBoards, getBoardById } from "../services/api";
+import { synthesizeSpeech, getDefaultBoard } from "../services/api";
 
 const DefaultBoard = () => {
   const [defaultBoard, setDefaultBoard] = useState(null);
