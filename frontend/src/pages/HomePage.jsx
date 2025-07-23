@@ -52,15 +52,14 @@ const HomePage = ({ user, allBoards }) => {
 
   if (!user) {
     return (
-      <div className="board-container">
-        <p className="user-alert">Log in to create custom boards.</p>
-        <SpeechBox words={speechWords} setWords={setSpeechWords} />
-        <div className="choices-container">
-          {defaultChoices.map((choice) => (
-            <Tile key={choice._id} choice={choice} onClick={addWord} />
-          ))}
-        </div>
-      </div>
+      <div>
+      {!user && (
+        <h3 className="user-alert" style={{ textAlign: "center" }}>
+          Log in to create custom boards.
+        </h3>
+      )}
+      <Board board={currentBoard} />
+    </div>
     );
   }
 
