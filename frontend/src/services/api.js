@@ -225,6 +225,21 @@ export const getBoardChoices = async () => {
   }
 };
 
+// Get default board
+export const getDefaultBoard = async () => {
+  try {
+    const response = await fetch("/api/boards/default");
+    if (!response.ok) {
+      throw new Error("Failed to fetch default board");
+    }
+    const board = await response.json();
+    return board;
+  } catch (error) {
+    console.error("Error fetching default board:", error);
+    return null;
+  }
+};
+
 
 export const synthesizeSpeech = async (text) => {
   try {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../components/Board";
+import DefaultBoard from "../components/DefaultBoard";
 import { getBoardById, getBoardChoices } from "../services/api";
 import "../styles/styles.css";
 import "../styles/HomePage.css";
@@ -24,7 +25,7 @@ const HomePage = ({ user, allBoards }) => {
             }))
           };
         console.log(defaultBoard);
-         setCurrentBoard(defaultBoard);
+        setCurrentBoard(defaultBoard);
         } catch (error) {
           console.error("Error fetching default choices:", error);
         }
@@ -60,7 +61,7 @@ const HomePage = ({ user, allBoards }) => {
           Log in to create custom boards.
         </h3>
       )}
-      <Board board={currentBoard} />
+      <defaultBoardBoard/>
     </div>
     );
   }

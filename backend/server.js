@@ -709,6 +709,21 @@ app.get("/api/board-choices", async (req, res) => {
 });
 
 
+// GET /api/boards/default - get the default public board
+app.get("/default", async (req, res) => {
+  try {
+    const defaultBoard = await BoardChoice.find().populate("choices");
+    if (!defaultBoard) {
+      return res.status(404).json({ message: "Default board not found." });
+    }
+    res.json(defaultBoard);
+  } catch (err) {
+    console.error("Error fetching default board:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 // 404 error for undefined routes
 app.use((req, res) => {
     res.jsonResponse(404, "Route not found.");
