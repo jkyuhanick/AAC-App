@@ -685,7 +685,7 @@ app.delete("/api/boards/:boardId/custom/:customId", verifyToken, async (req, res
   
 
 // Fetch all available board choices
-app.get("/api/board-choices", verifyToken, async (req, res) => {
+app.get("/api/board-choices", async (req, res) => {
   try {
     const choices = await BoardChoice.find({
       $or: [
