@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../components/Board";
-import SpeechBox from "../components/SpeechBox";
-import Tile from "../components/Tile";
 import { getBoardById, getBoardChoices } from "../services/api";
 import "../styles/styles.css";
 import "../styles/HomePage.css";
 
 const HomePage = ({ user, allBoards }) => {
   const [currentBoard, setCurrentBoard] = useState(null);
-  const [defaultChoices, setDefaultChoices] = useState([]);
-  const [speechWords, setSpeechWords] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +18,7 @@ const HomePage = ({ user, allBoards }) => {
           name: "Guest Board",
           choices: data,
         };
+        console.log(defaultBoard);
          setCurrentBoard(defaultBoard);
         } catch (error) {
           console.error("Error fetching default choices:", error);
