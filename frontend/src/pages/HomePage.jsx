@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Board from "../components/Board";
+import SpeechBox from "../components/SpeechBox";
+import Tile from "../components/Tile";
 import { getBoardById } from "../services/api";
 import "../styles/styles.css";
 import "../styles/HomePage.css";
