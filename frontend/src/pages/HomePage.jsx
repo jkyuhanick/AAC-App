@@ -1,52 +1,53 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Board from "../components/Board";
-import { getBoardById } from "../services/api";
+import Tile from "../components/Tile";
+import SpeechBox from "../components/SpeechBox";
+import { getBoardChoices } from "../services/api";
 import "../styles/styles.css";
 import "../styles/HomePage.css";
 
-const HomePage = ({ user, allBoards }) => {
-  const [currentBoard, setCurrentBoard] = useState(null);
+const HomePage = () => {
+  const [defaultChoices, setDefaultChoices] = useState([]);
+  const [speechWords, setSpeechWords] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchInitialBoard = async () => {
-      const lastViewedBoardId = localStorage.getItem("lastViewedBoardId");
-
-      if (lastViewedBoardId) {
-        const savedBoard = await getBoardById(lastViewedBoardId);
-        if (savedBoard) {
-          setCurrentBoard(savedBoard);
-          return;
-        }
-      }
-
-      if (allBoards.length > 0) {
-        setCurrentBoard(allBoards[0]); // Default board
+    const fetchDefaultChoices = async () => {
+      try {
+        const data = await getBoardChoices(); // Fetch all available choices
+        setDefaultChoices(data.choices || []);
+      } catch (error) {
+        console.error("Error fetching default choices:", error);
       }
     };
 
-    fetchInitialBoard();
-  }, [allBoards]);
+    fetchDefaultChoices();
+  }, []);
 
-  if (!user) {
-    return <h3 className="user-alert">Please log in to view your boards.</h3>;
-  }
+  const addWord = (choice) => {
+    const word = choice?.text;
+    if (!word) return;
 
-  if (allBoards.length === 0) {
-    return (
-      <div className="homePagediv">
-        <h3>No boards available. Create a new one!</h3>
-        <button onClick={() => navigate("/create-board")} className="create-button">
-          <i className="fa-solid fa-plus"></i> &nbsp; Create New Board
-        </button>
-      </div>
-    );
-  }
+    setSpeechWords((prev) => [...prev, { text: word, image: choice.image || "" }]);
+  };
 
   return (
-    <div>
-      {currentBoard && <Board board={currentBoard} />}
+    <div className="board-container">
+      <SpeechBox words={speechWords} setWords={setSpeechWords} />
+
+      <button onClick={() => navigate("/create-board")} className="create-button">
+        <i className="fa-solid fa-plus"></i> &nbsp; Create New Board
+      </button>
+
+      <div className="choices-container">
+        {defaultChoices.length > 0 ? (
+          defaultChoices.map((choice) => (
+            <Tile key={choice._id} choice={choice} onClick={addWord} />
+          ))
+        ) : (
+          <p>Loading default board...</p>
+        )}
+      </div>
     </div>
   );
 };
